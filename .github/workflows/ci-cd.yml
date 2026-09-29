@@ -1,0 +1,23 @@
+name: CI-CD Helm Deployment
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build-test-deploy:
+    runs-on: self-hosted
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Run JUnit Tests
+        run: mvn test
+
+      - name: Helm Lint
+        run: helm lint ./myapp
+
+      - name: Deploy with Helm
+        run: helm upgrade --install myapp ./myapp
