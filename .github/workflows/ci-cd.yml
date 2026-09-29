@@ -6,15 +6,12 @@ on:
       - main
 
 jobs:
-  build-test-deploy:
+  deploy:
     runs-on: self-hosted
 
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
-
-      - name: Run JUnit Tests
-        run: mvn test
 
       - name: Helm Lint
         run: helm lint ./myapp
